@@ -4,9 +4,7 @@ TreeStats::TreeStats()
 {
 	this->mNumWater = 0;
 	this->mNumFert = 0;
-	this->mSize = 0;
-	this->mHealth = 0;
-	this->mStatus = "";
+//	this->mHealth = 0;
 }
 
 //getters
@@ -21,20 +19,10 @@ int TreeStats::getmNumFert()
 	return this->mNumFert;
 }
 
-int TreeStats::getmHealth()
-{
-	return this->mHealth;
-}
-
-int TreeStats::getmSize()
-{
-	return this->mSize;
-}
-
-string TreeStats::getmStatus()
-{
-	return this->mStatus;
-}
+//int TreeStats::getmHealth()
+//{
+//	return this->mHealth;
+//}
 
 //setters
 
@@ -48,93 +36,84 @@ void TreeStats::setmNumFert(int newFert)
 	this->mNumFert = newFert;
 }
 
-void TreeStats::setmHealth(int health)
-{
-	this->mHealth = health;
-}
-
-void TreeStats::setmSize(int newSize)
-{
-	this->mSize = newSize;
-}
-
-void TreeStats::setmStatus(string newStatus)
-{
-	this->mStatus = newStatus;
-}
-
-void TreeStats::setmStatus()
-{
-	if (mHealth == 1)
-	{
-		this->mStatus = "Unhealthy";
-	}
-
-	else if (mHealth == 2)
-	{
-		this->mStatus = "Nuetral";
-	}
-	
-	else if (mHealth == 3)
-	{
-		this->mStatus = "Healthy";
-	}
-
-	else
-	{
-		this->mStatus = "";
-	}
-}
+//void TreeStats::setmHealth(int health)
+//{
+//	this->mHealth = health;
+//}
 
 
 // member functions
 
-void TreeStats::calcHealth(int water, int fert)
+int TreeStats::calcHealth()
 {
-	int wStat = 0;
-	int fStat = 0;
 	int health = 0;
-	
-	if (fert >= 2 && fert <= 3)
-		{
-			fStat = 2;
-		}
-		else if (fert == 1 || fert == 4)
-		{
-			fStat = 1;
-		}
-		else
-		{
-			fStat = 0;
-		}
+	int condition = 0;
 
-	if (water >= 4 || water <= 6)
-		{
-			wStat = 2;
-		}
-		else if (water == 7 || water == 3)
-		{
-			wStat = 1;
-		}
-		else
-		{
-			wStat = 0;
-		}
-	health = wStat + fStat;
-
-	switch (health)
+	//determining health of watering
+	if (mNumWater <= 1 || mNumWater >= 8)	//unhealthy 
 	{
-	case 4: mHealth = 3;
-			break;
-	case 3: mHealth = 3;
-			break;
-	case 2: mHealth = 2;
-			break;
-	case 1: mHealth = 2;
-			break;
-	case 0: mHealth = 1;
-			break;
+		health--;
+	}
+	else if (mNumWater >= 2 && mNumWater <= 5)	//healthy
+	{
+		health++;
+	}
+	else	//nuetral
+	{
+		health = health;
 	}
 
-	this->setmHealth(health);
+	//determining health of fertilization
+	if (mNumFert == 0 || mNumFert == 4)		// nuetral
+	{
+		health = health;
+	}
+	else if (mNumFert >= 1 && mNumFert <= 3)	//healthy
+	{
+		health++;
+		
+	}
+	else	//unhealthy
+	{
+		health--;
+	}
+
+	//determining condition
+	if (health >= 1)	//healthy
+	{
+		condition = 1;
+	}
+	else if (health == 0)	//nuetral
+	{
+		condition = 2;
+	}
+	else if (health < 0)	//unhealthy
+	{
+		condition = 3;
+	}
+
+	this->resetW();
+	this->resetF();
+
+	return condition;
+}
+
+void TreeStats::incWater()
+{
+	mNumWater++;
+}
+
+void TreeStats::incFert()
+{
+	mNumFert++;
+}
+
+void TreeStats::resetW()
+{
+	this->mNumWater = 0;
+}
+
+void TreeStats::resetF()
+{
+	this->mNumFert = 0;
 }

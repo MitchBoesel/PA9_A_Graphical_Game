@@ -149,9 +149,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="TreeSim.cpp" />
+    <ClCompile Include="TreeSimClicks.cpp" />
     <ClCompile Include="TreeStats.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="TreeSim.h" />
+    <ClInclude Include="TreeSimClicks.h" />
     <ClInclude Include="TreeStats.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

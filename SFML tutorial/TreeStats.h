@@ -4,6 +4,11 @@
 #include <fstream>
 #include <ctime>
 #include <SFML\Graphics.hpp>
+#include <time.h>
+#include <windows.h>
+#include <stdio.h>
+#include <conio.h>
+#include <SFML/System.hpp>
 
 using std::cout;
 using std::cin;
@@ -17,23 +22,21 @@ public:
 	
 	int getmNumWater();
 	int getmNumFert();
-	int getmSize();
-	int getmHealth();
-	string getmStatus();
+	//int getmHealth();
 
-	void setmHealth(int health);
+//	void setmHealth(int health);
 	void setmNumWater(int newWater);
 	void setmNumFert(int newFert);
-	void setmSize(int newSize);
-	void setmStatus(string newStatus);
-	void setmStatus();
-	void calcHealth(int water, int fert);
+
+	int calcHealth();
+	void incWater();
+	void incFert();
+	void resetW();
+	void resetF();
 
 private:
 	int mNumWater;
 	int mNumFert;
-	int mHealth;
-	int mSize;
-	string mStatus;
+	//int mHealth;
 
 };
